@@ -1,19 +1,32 @@
 import requests
 
-target = input("Введите айпи: ")
+target = input("Введите айпи: ").strip()
+
+if not target:
+    print("Введен неверный ip адрес")
+    input()
+    exit()
+
 url = f"http://ip-api.com/json/{target}"
 
-response = requests.get(url)
-
-if response.status_code == 200:
-    data = response.json()
-    print(f"IP: {target}")
-    print(f"Страна: {data.get('country')}")
-    print(f"Регион: {data.get('regionName')}")
-    print(f"Город: {data.get('city')}")
-    print(f"Провайдер: {data.get('isp')}")
-    print(f"Организация: {data.get('org')}")
-    print(f"Часовой пояс: {data.get('timezone')}")
-    print(f"Широта: {data.get('lat')}")
-    print(f"Долгота: {data.get('lon')}")
+try:
+    response = requests.get(url)
+    if response.status_code == 200:
+        itog = response.json()
+        if itog["status"] == "success":
+            print(f"IP: {target}")
+            print(f"Страна: {itog.get('country')}")
+            print(f"Регион: {itog.get('regionName')}")
+            print(f"Город: {itog.get('city')}")
+            print(f"Провайдер: {itog.get('isp')}")
+            print(f"Организация: {itog.get('org')}")
+            print(f"Часовой пояс: {itog.get('timezone')}")
+            print(f"Широта: {itog.get('lat')}")
+            print(f"Долгота: {itog.get('lon')}")
+        else:
+            print("ошибка с api")
+    else:
+         print("ошибка с http")
+except Exception as e:
+    print(e)
 
