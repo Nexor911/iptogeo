@@ -24,9 +24,9 @@ try:
             print(f"Широта: {itog.get('lat')}")
             print(f"Долгота: {itog.get('lon')}")
         else:
-            print("ошибка с api")
+            print(f"api вернул ошибку: {itog.get('message')}")
     else:
-         print("ошибка с http")
+         print(f"ошибка http: status {response.status_code}")
 except Exception as e:
     print(e)
 
