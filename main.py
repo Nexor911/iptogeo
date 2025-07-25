@@ -1,4 +1,5 @@
 import requests
+import webbrowser
 
 target = input("Введите айпи: ").strip()
 
@@ -30,3 +31,7 @@ try:
 except Exception as e:
     print(e)
 
+geo = input("Открыть результат в браузере? (y/n): ")
+
+if geo == "y":
+    webbrowser.open(f"https://www.google.com/maps/search/?q={itog.get('lat')} {itog.get('lon')}")
