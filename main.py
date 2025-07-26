@@ -24,14 +24,13 @@ try:
             print(f"Часовой пояс: {itog.get('timezone')}")
             print(f"Широта: {itog.get('lat')}")
             print(f"Долгота: {itog.get('lon')}")
+
+            geo = input("Открыть результат в браузере? (y/n): ")
+            if geo == "y":
+                webbrowser.open(f"https://www.google.com/maps/search/?q={itog.get('lat')} {itog.get('lon')}")
         else:
             print(f"api вернул ошибку: {itog.get('message')}")
     else:
          print(f"ошибка http: status {response.status_code}")
 except Exception as e:
     print(e)
-
-geo = input("Открыть результат в браузере? (y/n): ")
-
-if geo == "y":
-    webbrowser.open(f"https://www.google.com/maps/search/?q={itog.get('lat')} {itog.get('lon')}")
